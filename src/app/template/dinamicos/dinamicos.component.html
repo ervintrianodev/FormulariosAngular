@@ -1,0 +1,87 @@
+<h2>Template: <small>Dinamicos</small></h2>
+<hr />
+<form (ngSubmit)="guardar()" autocomplete="off" #miFormulario="ngForm">
+  <div class="row">
+    <div class="col-sm-3">
+      <label for="" class="form-label">Nombre</label>
+    </div>
+    <div class="col-sm-9">
+      <input
+        type="text"
+        id="nombre"
+        name="nombre"
+        class="form-control"
+        placeholder="Nombre de la persona"
+        [ngModel]="persona.nombre"
+        #nombretxt="ngModel"
+        required
+        minlength="3"
+      />
+      <!-- <span
+        *ngIf="nombretxt.invalid && (nombretxt.dirty || nombretxt.touched)"
+        class="text-danger"
+        >Este campo es obligatorio</span
+      >-->
+      <span *ngIf="nombretxt.errors?.['minlength']" class="text-danger"
+        >Debe tener al menos 4 caracteres de longitud</span
+      >
+    </div>
+  </div>
+  <!--Agregar favorito-->
+  <div class="row mt-3">
+    <div class="col-sm-3">
+      <label for="favorito" class="form-label">Agregar</label>
+    </div>
+    <div class="col-sm-9">
+      <div class="input-group">
+        <input
+          type="text"
+          name="favorito"
+          id="favorito"
+          [(ngModel)]="nuevoJuego"
+          (keyup.enter)="agregarJuego()"
+          class="form-control"
+          placeholder="Agregar favorito"
+        />
+        <button type="button" (click)="agregarJuego()" class="btn btn-success">
+          Agregar
+        </button>
+      </div>
+    </div>
+  </div>
+  <!--Lista de favoritos-->
+  <div class="row mb-3">
+    <div class="col-sm-3">
+      <label for="" class="form-label">Favoritos</label>
+    </div>
+    <div class="col-sm-9 mt-2">
+      <div
+        class="input-group mt-3"
+        *ngFor="let juego of persona.favoritos; let i = index"
+      >
+        <input
+          type="text"
+          [ngModel]="juego.nombre"
+          class="form-control"
+          name="favorito_{{ i }}"
+        />
+        <button class="btn btn-outline-danger" (click)="eliminar(i)">
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+  <!--Boton-->
+  <div class="row mt-3">
+    <div class="col-12">
+      <button
+        [disabled]="miFormulario.invalid"
+        type="button"
+        (click)="guardar()"
+        class="btn btn-primary float-end"
+      >
+        Guardar
+      </button>
+    </div>
+  </div>
+</form>

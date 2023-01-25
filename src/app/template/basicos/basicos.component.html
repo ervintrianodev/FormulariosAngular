@@ -1,0 +1,83 @@
+<h2>Template Basicos</h2>
+<div class="row">
+  <div class="col">
+    <form (submit)="guardar(miFormulario)" #miFormulario="ngForm">
+      <div class="mb-3 row">
+        <!--Input nombre producto-->
+        <label for="nombre" class="col-sm-3 col-form-label">Producto</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            name="nombre"
+            id="nombre"
+            autocomplete="off"
+            placeholder="Nombre del producto"
+            class="form-control"
+            ngModel
+            required
+            minlength="3"
+            #producto="ngModel"
+          />
+          <span
+            *ngIf="producto.invalid && (producto.dirty || producto.touched)"
+            class="form-text text-danger"
+            >El producto debe tener al menos 3 caracteres de longitud</span
+          >
+        </div>
+      </div>
+      <!--Input precio-->
+      <div class="mb-3 row">
+        <label for="nombre" class="col-sm-3 col-form-label">Precio</label>
+        <div class="col-sm-9">
+          <input
+            type="number"
+            name="precio"
+            id="precio"
+            placeholder="Precio del producto"
+            class="form-control"
+            ngModel
+            required
+            #precio="ngModel"
+            min="0"
+            value="0"
+          />
+
+          <span
+            *ngIf="precio.value <= 0 && (precio.dirty || precio.touched)"
+            class="form-text text-danger"
+            >Debe introducir un precio mayor a 0 (cero)</span
+          >
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <!--Input existencias-->
+        <label for="nombre" class="col-sm-3 col-form-label">Existencias</label>
+        <div class="col-sm-9">
+          <input
+            type="number"
+            name="existencias"
+            id="existencias"
+            placeholder="Existencias del producto"
+            class="form-control"
+            ngModel
+            customMin
+            [minimo]="0"
+            required
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col d-flex justify-content-end">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="miFormulario.invalid"
+          >
+            Guardar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
