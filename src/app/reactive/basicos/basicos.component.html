@@ -1,0 +1,65 @@
+<h2>Template Basicos</h2>
+<div class="row">
+  <div class="col">
+    <form (ngSubmit)="guardar()" [formGroup]="miFormulario">
+      <div class="mb-3 row">
+        <!--Input nombre producto-->
+        <label for="nombre" class="col-sm-3 col-form-label">Producto</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            id="nombre"
+            autocomplete="off"
+            formControlName="nombre"
+            placeholder="Nombre del producto"
+            class="form-control"
+          />
+          <span *ngIf="campoEsValido('nombre')" class="form-text text-danger"
+            >El producto debe tener al menos 3 caracteres de longitud</span
+          >
+        </div>
+      </div>
+      <!--Input precio-->
+      <div class="mb-3 row">
+        <label for="nombre" class="col-sm-3 col-form-label">Precio</label>
+        <div class="col-sm-9">
+          <input
+            type="number"
+            id="precio"
+            formControlName="precio"
+            placeholder="Precio del producto"
+            class="form-control"
+          />
+
+          <span class="form-text text-danger" *ngIf="campoEsValido('precio')"
+            >Debe introducir un precio mayor a 0 (cero)</span
+          >
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <!--Input existencias-->
+        <label for="nombre" class="col-sm-3 col-form-label">Existencias</label>
+        <div class="col-sm-9">
+          <input
+            type="number"
+            id="existencias"
+            formControlName="existencias"
+            placeholder="Existencias del producto"
+            class="form-control"
+          />
+          <span
+            class="form-text text-danger"
+            *ngIf="campoEsValido('existencias')"
+            >Las existencias deben ser 0 o mayor</span
+          >
+        </div>
+      </div>
+      <div class="row">
+        <div class="col d-flex justify-content-end">
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
